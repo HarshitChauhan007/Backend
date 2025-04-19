@@ -11,9 +11,19 @@ const PORT = process.env.PORT || 5000;
 databaseConnection()
     .then(() => {
         app.listen(PORT, () => {
-            console.log(`⚙️ Server is running successfully at port : ${PORT}`);
+            console.info("DATABASE_CONNECTED", {
+                meta: {
+                    PORT: PORT,
+                    Message: "🚀🚀Database connected succcessfully...🚀🚀",
+                },
+            });
         });
     })
     .catch(error => {
-        console.log("❌ MONGODB connection failed !!! ❌", error);
+        console.info("DATABASE_CONNECTED_FAILED", {
+            meta: {
+                Error: error,
+                Message: "❌ Database connection failed !!! ❌",
+            },
+        });
     });
