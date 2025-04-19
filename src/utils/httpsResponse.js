@@ -11,7 +11,7 @@ export default (req, res, responseStatusCode, responseMessage, data) => {
     };
 
     console.info("CONTROLLER_RESPONSE", {
-        mrta: response,
+        meta: response,
     });
 
     res.status(responseStatusCode).json(response);
