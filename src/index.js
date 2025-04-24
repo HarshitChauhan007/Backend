@@ -1,29 +1,24 @@
-import databaseConnection from "./database/databaseConnection.js";
-import { app } from "./app.js";
-import dotenv from "dotenv";
+const express = require('express');
+const dotenv = require('dotenv');
+const userRouter = require('./routers/userRouter');
+const sequelize = require('./config/database');
+const User = require('./models/user');
+require('dotenv').config(); // must be at the top!
 
-dotenv.config({
-    path: "./.env",
-});
 
-const PORT = process.env.PORT || 5000;
+dotenv.config();
 
-databaseConnection()
-    .then(() => {
-        app.listen(PORT, () => {
-            console.info("DATABASE_CONNECTED", {
-                meta: {
-                    PORT: PORT,
-                    Message: "🚀🚀Database connected succcessfully...🚀🚀",
-                },
-            });
-        });
-    })
-    .catch(error => {
-        console.info("DATABASE_CONNECTED_FAILED", {
-            meta: {
-                Error: error,
-                Message: "❌ Database connection failed !!! ❌",
-            },
-        });
-    });
+const app = express();
+app.use(express.json());
+
+app.use(express.urlencoded({ extended: true })); // Required for form data
+
+
+app.use('/api/users', userRouter);
+
+sequelize.sync() // Sync Sequelize models to DB
+  .then(() => console.log('Database synced'))
+  .catch(err => console.error('Error syncing database:', err));
+
+const PORT = process.env.PORT || 6000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
