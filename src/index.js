@@ -1,24 +1,24 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const userRouter = require('./routers/userRouter');
-const sequelize = require('./config/database');
-const User = require('./models/user');
-require('dotenv').config(); // must be at the top!
-
-
+const dotenv = require("dotenv");
 dotenv.config();
+require("dotenv").config(); // dotenv configuration
 
-const app = express();
-app.use(express.json());
-
-app.use(express.urlencoded({ extended: true })); // Required for form data
-
-
-app.use('/api/users', userRouter);
-
-sequelize.sync() // Sync Sequelize models to DB
-  .then(() => console.log('Database synced'))
-  .catch(err => console.error('Error syncing database:', err));
+const app = require("./app.js");
+const sequelize = require("./config/database");
 
 const PORT = process.env.PORT || 6000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+// sequelize
+//     .sync() // Database Connection
+//     .then(() => {
+//         console.log("Database synced");
+//         app.listen(PORT, () => {
+//             console.log(`Server is running on port ${PORT}`);
+//         });
+//     })
+//     .catch(err => {
+//         console.error("Error syncing database:", err);
+//     });
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
