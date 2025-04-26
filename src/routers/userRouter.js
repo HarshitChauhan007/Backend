@@ -6,10 +6,8 @@ const router = express.Router();
 
 router.route("/register").post(register);
 router.route("/login").post(login);
-router.route("/hanu").get((req, res) => res.json({ message: "Hello Hanu" }));
 
-// Protected route example
-router.route("/profile").get( authMiddleware, (req, res) => {
+router.route("/profile").get(authMiddleware, (req, res) => {
     res.json({ message: "Profile data", user: req.user });
 });
 
