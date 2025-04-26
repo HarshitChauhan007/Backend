@@ -1,15 +1,16 @@
-const express = require('express');
-const { register, login } = require('../controller/user');
-const authMiddleware = require('../middlewares/authMiddleware');
+const { register, login } = require("../controller/user.js");
+const authMiddleware = require("../middlewares/authMiddleware.js");
 
+const express = require("express");
 const router = express.Router();
 
-router.post('/register', register);
-router.post('/login', login);
+router.route("/register").post(register);
+router.route("/login").post(login);
+router.route("/hanu").get((req, res) => res.json({ message: "Hello Hanu" }));
 
 // Protected route example
-router.get('/profile', authMiddleware, (req, res) => {
-  res.json({ message: 'Profile data', user: req.user });
+router.route("/profile").get( authMiddleware, (req, res) => {
+    res.json({ message: "Profile data", user: req.user });
 });
 
 module.exports = router;
