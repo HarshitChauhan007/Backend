@@ -5,9 +5,9 @@ const Event = sequelize.define(
     "Event",
     {
         id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
             primaryKey: true,
-            autoIncrement: true,
         },
         title: {
             type: DataTypes.STRING,
@@ -34,7 +34,7 @@ const Event = sequelize.define(
     },
     {
         timestamps: true,
-        tableName: "events",
+        tableName: "Events",
     }
 );
 

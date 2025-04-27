@@ -11,9 +11,9 @@ const express = require("express");
 const router = express.Router();
 
 router.route("/create").get(upload.single("file"), createEvent);
-router.route("/update").patch(upload.single("file"), updateEvent);
+router.route("/update/:id").patch(upload.single("file"), updateEvent);
 router.route("/getAll").post(getAllEvents);
-router.route("/getById").post(getEventById);
-router.route("/delete").post(deleteEvent);
+router.route("/getById/:id").post(getEventById);
+router.route("/delete/:id").post(deleteEvent);
 
 module.exports = router;
