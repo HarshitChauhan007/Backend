@@ -17,6 +17,10 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(express.static("public"));
 app.use(cookieParser());
 
+app.get("/", (req, res) => {
+    res.send("Welcome Event Manager Project");
+});
+
 app.use("/api/v1", apiRouter);
 
 module.exports = app;
